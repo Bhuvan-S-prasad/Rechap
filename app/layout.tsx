@@ -7,8 +7,9 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs'
+} from "@clerk/nextjs";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -26,13 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${openSans.variable} antialiased`}
-        >
-          
-          {children}
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${openSans.variable} antialiased bg-[#313338]`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+            storageKey="rechap-theme"
+          >
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
