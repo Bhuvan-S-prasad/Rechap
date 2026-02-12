@@ -1,3 +1,4 @@
+import { InitialModal } from "@/components/modals/initial-modal";
 import { initialProfile } from "@/lib/initial-profile";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
@@ -19,7 +20,11 @@ const SetUpPage = async () => {
     return redirect(`/channel/${channel.id}`);
   }
 
-  return <div>{profile.name}</div>;
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <InitialModal />
+    </div>
+  );
 };
 
 export default SetUpPage;
