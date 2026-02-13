@@ -1,47 +1,46 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { MemberRole } from "@/generated/prisma/enums";
 
 export async function POST(req: Request) {
-    try {
-        const {name, imageUrl} = await req.json();
-        const profile = await currentUser();
+  try {
+    const { name, imageUrl } = await req.json();
+    const profile = await currentUser();
 
-        if(!profile) {
-            return new NextResponse("Unauthorized", { status: 401 })
-        }
-
-        if(!name || !imageUrl) {
-            return new NextResponse("Missing required fields", { status: 400 })
-        }
-
-       const channel = await prisma.channel.create({
-        data: {
-            userId: profile.id,
-            name,
-            imageUrl,
-            inviteCode: uuidv4(),
-            rooms: {
-                create: {
-                    name: "general",
-                    userId: profile.id,
-                }
-            },
-            members: {
-                create: {
-                    userId: profile.id,
-                    role: MemberRole.ADMIN,
-                }
-            }
-        }
-       })
-
-       return NextResponse.json(channel);
-
-    } catch(error) {
-        console.log("SERVER_POST: ", error)
-        return new NextResponse("Internal Server Error", { status: 500 })
+    if (!profile) {
+      return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    if (!name || !imageUrl) {
+      return new NextResponse("Missing required fields", { status: 400 });
+    }
+
+    const channel = await prisma.channel.create({
+      data: {
+        userId: profile.id,
+        name,
+        imageUrl,
+        inviteCode: uuidv4(),
+        rooms: {
+          create: {
+            name: "general",
+            userId: profile.id,
+          },
+        },
+        members: {
+          create: {
+            userId: profile.id,
+            role: MemberRole.ADMIN,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(channel);
+  } catch (error) {
+    console.log("SERVER_POST: ", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
 }

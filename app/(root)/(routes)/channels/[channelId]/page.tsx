@@ -1,6 +1,8 @@
 const ChannelIdPage = () => {
     return (
-        <div>ChannelPage</div>
+        <div>
+            sidebar check
+        </div>
     )
 }
 

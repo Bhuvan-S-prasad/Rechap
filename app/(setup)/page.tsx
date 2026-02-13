@@ -17,7 +17,7 @@ const SetUpPage = async () => {
   });
 
   if (channel) {
-    return redirect(`/channel/${channel.id}`);
+    return redirect(`/channels/${channel.id}`);
   }
 
   return (
