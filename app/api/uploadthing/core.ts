@@ -13,13 +13,13 @@ export const ourFileRouter = {
   serverImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(() => handleAuth())
     .onUploadComplete((data) => {
-      console.log(data);
+      return { url: data.file.url, ufsUrl: data.file.ufsUrl };
     }),
 
   messageFile: f(["image", "pdf"])
     .middleware(() => handleAuth())
     .onUploadComplete((data) => {
-      console.log(data);
+      return { url: data.file.url, ufsUrl: data.file.ufsUrl };
     }),
 } satisfies FileRouter;
 
