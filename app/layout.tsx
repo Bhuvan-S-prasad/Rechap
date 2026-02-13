@@ -10,6 +10,7 @@ import {
 } from "@clerk/nextjs";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ModalProvider } from "@/components/providers/model-provider";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="rechap-theme"
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>
