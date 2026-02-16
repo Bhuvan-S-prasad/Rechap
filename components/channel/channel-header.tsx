@@ -18,6 +18,7 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChannelHeaderProps {
   channel: ChannelWithMembersWithProfiles;
@@ -27,22 +28,26 @@ interface ChannelHeaderProps {
 export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
+  const { onOpen } = useModal();
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="focus:outline-none" asChild>
-        <div className="flex justify-between">
+      <div className="flex justify-between">
+        <DropdownMenuTrigger className="focus:outline-none" asChild>
           <button className="text-sm font-semibold flex items-center px-3 h-10 rounded-xl hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
             {channel.name}
             <ChevronDown className="h-5 w-5 ml-1" />
           </button>
-          {isModerator && (
-            <button className="text-white px-3 text-sm cursor-pointer rounded-2xl hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 dark:text-neutral-400 dark:hover:text-neutral-200 transition">
-              <UserPlus className="h-4 w-4 ml-auto" />
-            </button>
-          )}
-        </div>
-      </DropdownMenuTrigger>
+        </DropdownMenuTrigger>
+        {isModerator && (
+          <button
+            onClick={() => onOpen("invite", { channel })}
+            className="text-white px-3 text-sm cursor-pointer rounded-2xl hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 dark:text-neutral-400 dark:hover:text-neutral-200 transition"
+          >
+            <UserPlus className="h-4 w-4 ml-auto" />
+          </button>
+        )}
+      </div>
       <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
         {isAdmin && (
           <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
@@ -58,7 +63,10 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
         )}
 
         {isModerator && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+            onClick={() => onOpen("invite", { channel })}
+            className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition"
+          >
             Invite People
             <UserPlus className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
