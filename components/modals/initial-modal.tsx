@@ -51,6 +51,7 @@ export const InitialModal = () => {
       form.reset();
       router.refresh();
       window.location.reload();
+      // router.push(`/channels/${channel.id}`)
     } catch (error) {
       console.log(error);
     }
