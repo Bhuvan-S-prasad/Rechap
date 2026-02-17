@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
+import qs from "query-string";
 import { useModal } from "@/hooks/use-modal-store";
 import {
   Check,
@@ -33,6 +33,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { MemberRole } from "@/generated/prisma/enums";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const roleIcons: Record<string, React.ReactNode> = {
   ADMIN: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
@@ -41,7 +44,8 @@ const roleIcons: Record<string, React.ReactNode> = {
 };
 
 export const MembersModal = () => {
-  const { isOpen, onClose, type, data } = useModal();
+  const router = useRouter();
+  const { isOpen, onClose, type, data, onOpen } = useModal();
 
   const isModalOpen = isOpen && type === "members";
 
@@ -49,6 +53,26 @@ export const MembersModal = () => {
     ?.channel;
 
   const [loadingId, setLoadingId] = useState("");
+
+  const onRoleChange = async (memberId: string, role: MemberRole) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          channelId: channel?.id,
+          memberId,
+        },
+      });
+      const response = await axios.patch(url, { role });
+      router.refresh();
+      onOpen("members", { channel: response.data });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingId("");
+    }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -91,14 +115,22 @@ export const MembersModal = () => {
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
                               <DropdownMenuSubContent>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() =>
+                                    onRoleChange(member.id, "GUEST")
+                                  }
+                                >
                                   <ShieldQuestion className="h-4 w-4 mr-2" />
                                   <span>Guest</span>
                                   {member.role === "GUEST" && (
                                     <Check className="h-4 w-4 ml-auto" />
                                   )}
                                 </DropdownMenuItem>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() =>
+                                    onRoleChange(member.id, "MODERATOR")
+                                  }
+                                >
                                   <ShieldCheck className="h-4 w-4 mr-2" />
                                   <span>Moderator</span>
                                   {member.role === "MODERATOR" && (
