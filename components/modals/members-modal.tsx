@@ -61,7 +61,6 @@ export const MembersModal = () => {
         url: `/api/members/${memberId}`,
         query: {
           channelId: channel?.id,
-          memberId,
         },
       });
       const response = await axios.patch(url, { role });
