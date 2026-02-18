@@ -52,9 +52,9 @@ export const InviteModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-primary p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
+          <DialogTitle className="text-2xl text-center font-bold text-primary">
             Invite people to your Channel
           </DialogTitle>
         </DialogHeader>
@@ -74,7 +74,7 @@ export const InviteModal = () => {
             <Button
               size="icon"
               disabled={isLoading}
-              className="shrink-0"
+              className="shrink-0 bg-card hover:bg-card-foreground"
               onClick={onCopy}
             >
               {copied ? (
@@ -89,7 +89,7 @@ export const InviteModal = () => {
             <Button
               variant="link"
               size="sm"
-              className="text-xs text-zinc-500 px-0 flex items-center gap-2"
+              className="text-xs text-emerald-500 px-0 flex items-center gap-2"
               onClick={onNew}
               disabled={isLoading}
             >

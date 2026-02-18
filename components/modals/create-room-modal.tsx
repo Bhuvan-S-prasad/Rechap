@@ -83,7 +83,7 @@ export const CreateRoomModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Create Room
@@ -97,13 +97,13 @@ export const CreateRoomModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="uppercase text-xs font-bold text-black">
+                    <FormLabel className="uppercase text-xs font-bold text-muted-foreground">
                       Room Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className="bg-white border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="bg-background border border-border focus-visible:ring-0 text-foreground focus-visible:ring-offset-0"
                         placeholder="Enter room name"
                         {...field}
                       />
@@ -117,7 +117,7 @@ export const CreateRoomModal = () => {
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="uppercase text-xs font-bold text-black">
+                    <FormLabel className="uppercase text-xs font-bold text-muted-foreground">
                       Room Type
                     </FormLabel>
                     <Select
@@ -126,7 +126,7 @@ export const CreateRoomModal = () => {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="bg-white border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0">
+                        <SelectTrigger className="bg-background border border-border focus-visible:ring-0 text-foreground focus-visible:ring-offset-0">
                           <SelectValue placeholder="Select room type" />
                         </SelectTrigger>
                       </FormControl>
@@ -141,7 +141,7 @@ export const CreateRoomModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
+            <DialogFooter className="bg-muted px-6 py-4">
               <Button disabled={isLoading} variant="primary" className="w-full">
                 Create
               </Button>

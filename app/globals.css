@@ -78,8 +78,7 @@ body,
 .dark {
   --background: rgb(18, 18, 20);
   --foreground: rgb(231, 233, 234);
-  --card: rgb(23, 24, 28);
-  --card-foreground: rgb(217, 217, 217);
+  --card: rgba(36, 36, 41) --card-foreground: rgb(217, 217, 217);
   --popover: rgb(44, 44, 48);
   --popover-foreground: rgb(231, 233, 234);
   --primary: rgb(255, 255, 255);

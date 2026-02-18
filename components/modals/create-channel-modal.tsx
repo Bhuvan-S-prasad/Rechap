@@ -67,12 +67,12 @@ export const CreateChannelModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
+          <DialogTitle className="text-2xl text-center font-bold text-foreground">
             Customize your Channel
           </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+          <DialogDescription className="text-center text-muted-foreground">
             Give your channel a name and an image. You can always change it
             later.
           </DialogDescription>
@@ -86,11 +86,11 @@ export const CreateChannelModal = () => {
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="uppercase text-xs font-bold text-black">
+                      <FormLabel className="uppercase text-xs font-bold text-muted-foreground">
                         Channel Image
                       </FormLabel>
                       <FormControl>
-                        <div className="flex items-center justify-center text-center">
+                        <div className="flex items-center justify-center text-center text-white">
                           <FileUpload
                             endpoint="serverImage"
                             value={field.value}
@@ -108,7 +108,7 @@ export const CreateChannelModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="uppercase text-xs font-bold text-black">
+                    <FormLabel className="uppercase text-xs font-bold text-muted-foreground">
                       Channel Name
                     </FormLabel>
                     <FormControl>
@@ -124,8 +124,8 @@ export const CreateChannelModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button disabled={isLoading} variant="primary" className="w-full">
+            <DialogFooter className="bg-muted px-6 py-4">
+              <Button disabled={isLoading} variant="primary" className="w-full bg-emerald-500 text-black hover:bg-emerald-600">
                 Create
               </Button>
             </DialogFooter>

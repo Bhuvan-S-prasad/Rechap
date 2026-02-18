@@ -76,12 +76,12 @@ export const EditChannelModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foregroun p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
+          <DialogTitle className="text-2xl text-center font-bold text-primary">
             Customize your Channel
           </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+          <DialogDescription className="text-center text-muted-foreground">
             Give your channel a name and an image. You can always change it
             later.
           </DialogDescription>
@@ -95,7 +95,7 @@ export const EditChannelModal = () => {
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="uppercase text-xs font-bold text-black">
+                      <FormLabel className="uppercase text-xs font-bold text-primary">
                         Channel Image
                       </FormLabel>
                       <FormControl>
@@ -117,13 +117,13 @@ export const EditChannelModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="uppercase text-xs font-bold text-black">
+                    <FormLabel className="uppercase text-xs font-bold text-primary">
                       Channel Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className="bg-white border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="bg-white border-0 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                         placeholder="Enter channel name"
                         {...field}
                       />
@@ -133,8 +133,12 @@ export const EditChannelModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button disabled={isLoading} variant="primary" className="w-full">
+            <DialogFooter className="bg-card-foreground px-6 py-4 ">
+              <Button
+                disabled={isLoading}
+                variant="primary"
+                className="w-full  bg-emerald-500 text-black hover:bg-emerald-600"
+              >
                 Save Changes
               </Button>
             </DialogFooter>
