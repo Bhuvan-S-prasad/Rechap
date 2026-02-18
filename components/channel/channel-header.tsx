@@ -78,7 +78,10 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isModerator && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+            onClick={() => onOpen("createRoom")}
+            className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition"
+          >
             Create Room
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
