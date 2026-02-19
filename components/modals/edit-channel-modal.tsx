@@ -23,6 +23,8 @@ import { Button } from "../ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useModal } from "@/hooks/use-modal-store";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -33,8 +35,12 @@ const formSchema = z.object({
   }),
 });
 
-export const InitialModal = () => {
+export const EditChannelModal = () => {
+  const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
+  const isModalOpen = isOpen && type === "editChannel";
+  const { channel } = data;
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,25 +49,36 @@ export const InitialModal = () => {
     },
   });
 
+  useEffect(() => {
+    if (channel) {
+      form.setValue("name", channel.name);
+      form.setValue("imageUrl", channel.imageUrl);
+    }
+  }, [channel, form]);
+
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/channels", values);
+      await axios.patch(`/api/channels/${channel?.id}`, values);
       form.reset();
       router.refresh();
-      window.location.reload();
-      // router.push(`/channels/${channel.id}`)
+      onClose();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleClose = () => {
+    form.reset();
+    onClose();
+  };
+
   return (
-    <Dialog open>
-      <DialogContent className="bg-card text-primary p-0 overflow-hidden sm:max-w-md">
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
+      <DialogContent className="bg-card text-card-foregroun p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
+          <DialogTitle className="text-2xl text-center font-bold text-primary">
             Customize your Channel
           </DialogTitle>
           <DialogDescription className="text-center text-muted-foreground">
@@ -116,13 +133,13 @@ export const InitialModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-card-foreground px-6 py-4">
+            <DialogFooter className="bg-card-foreground px-6 py-4 ">
               <Button
                 disabled={isLoading}
                 variant="primary"
                 className="w-full  bg-emerald-500 text-black hover:bg-emerald-600"
               >
-                Create
+                Save Changes
               </Button>
             </DialogFooter>
           </form>

@@ -50,13 +50,19 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
       </div>
       <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
         {isAdmin && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+            onClick={() => onOpen("editChannel", { channel })}
+            className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition"
+          >
             channel Settings
             <Settings className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isAdmin && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+            onClick={() => onOpen("members", { channel })}
+            className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition"
+          >
             Manage Members
             <Users className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
@@ -72,20 +78,27 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isModerator && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+            onClick={() => onOpen("createRoom")}
+            className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition"
+          >
             Create Room
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem className="text-destructive px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+          onClick={() => onOpen("deleteChannel", { channel })}
+          className="text-destructive px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
             Delete Channel
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {!isAdmin && (
-          <DropdownMenuItem className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+          onClick={() => onOpen("leaveChannel", { channel })}
+          className="text-primary px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
             Leave Channel
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
