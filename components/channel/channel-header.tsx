@@ -88,7 +88,9 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
         )}
         {isModerator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem className="text-destructive px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <DropdownMenuItem
+          onClick={() => onOpen("deleteChannel", { channel })}
+          className="text-destructive px-3 py-2 text-sm cursor-pointer hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
             Delete Channel
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
