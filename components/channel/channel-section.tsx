@@ -37,7 +37,7 @@ export const ChannelSection = ({
         </ActionTooltip>
       )}
       {role === MemberRole.ADMIN && sectionType === "members" && (
-        <ActionTooltip label="Invite Member" side="top">
+        <ActionTooltip label="Manage Members" side="top">
           <button
             onClick={() => onOpen("members", { channel } )}
             className="text-zinc-400 hover:text-zinc-300 transition"
