@@ -44,40 +44,38 @@ const formSchema = z.object({
   type: z.enum(["TEXT", "AUDIO", "VIDEO"]),
 });
 
-export const CreateRoomModal = () => {
+export const EditRoomModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
-  const params = useParams();
-  const isModalOpen = isOpen && type === "createRoom";
-  const { roomType } = data;
+  const isModalOpen = isOpen && type === "editRoom";
+  const { channel, room } = data;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: roomType || "TEXT",
+      type: "TEXT",
     },
   });
 
   useEffect(() => {
-    if (roomType) {
-      form.setValue("type", roomType);
-    } else {
-      form.setValue("type", "TEXT");
+    if (room) {
+      form.setValue("name", room.name);
+      form.setValue("type", room.type);
     }
-  }, [roomType, form]);
+  }, [form, room]);
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const url = qs.stringifyUrl({
-        url: "/api/rooms",
+        url: `/api/rooms/${room?.id}`,
         query: {
-          channelId: params?.channelId,
+          channelId: channel?.id,
         },
       });
-      await axios.post(url, values);
+      await axios.patch(url, values);
       form.reset();
       router.refresh();
       onClose();
@@ -96,7 +94,7 @@ export const CreateRoomModal = () => {
       <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Create Room
+            Edit Room
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
@@ -153,7 +151,7 @@ export const CreateRoomModal = () => {
             </div>
             <DialogFooter className="bg-muted px-6 py-4">
               <Button disabled={isLoading} variant="primary" className="w-full">
-                Create
+                Edit
               </Button>
             </DialogFooter>
           </form>

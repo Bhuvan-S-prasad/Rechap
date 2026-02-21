@@ -7,6 +7,8 @@ import { InviteModal } from "../modals/invite-modal";
 import { MembersModal } from "../modals/members-modal";
 import { LeaveChannelModal } from "../modals/leave-channel-modal";
 import { DeleteChannelModal } from "../modals/delete-channel-modal";
+import { DeleteRoomModal } from "../modals/delete-room-modal";
+import { EditRoomModal } from "../modals/edit-room-modal";
 
 export const ModalProvider = () => {
   return (
@@ -18,6 +20,8 @@ export const ModalProvider = () => {
       <CreateRoomModal />
       <LeaveChannelModal />
       <DeleteChannelModal />
+      <DeleteRoomModal />
+      <EditRoomModal />
     </>
   );
 };

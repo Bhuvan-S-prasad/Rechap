@@ -5,6 +5,10 @@ import { ChannelHeader } from "./channel-header";
 import { ScrollArea } from "../ui/scroll-area";
 import { ChannelSearch } from "./channel-search";
 import { Hash, Mic, ShieldAlert, ShieldCheck, User, Video } from "lucide-react";
+import { Separator } from "../ui/separator";
+import { ChannelSection } from "./channel-section";
+import { RoomType } from "@/generated/prisma/enums";
+import { ChannelRoom } from "./channel-room";
 
 interface ChannelSidebarProps {
   channelId: string;
@@ -60,7 +64,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
     (member) => member.userId !== profile.id,
   );
 
-  const role = channel?.members.find(
+  const role = channel.members.find(
     (member) => member.userId === profile.id,
   )?.role;
 
@@ -110,6 +114,89 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
             ]}
           />
         </div>
+
+        <Separator className="bg-zinc-700 rounded-md my-2" />
+        {!!textRooms?.length && (
+          <div>
+            <ChannelSection
+              label="Text Room"
+              role={role}
+              sectionType="rooms"
+              roomType={RoomType.TEXT}
+              channel={channel}
+            />
+            <div className="space-y-[2px]">
+              {textRooms.map((room) => (
+                <ChannelRoom
+                  key={room.id}
+                  room={room}
+                  channel={channel}
+                  role={role}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!!voiceRooms?.length && (
+          <div>
+            <ChannelSection
+              label="Voice Room"
+              role={role}
+              sectionType="rooms"
+              roomType={RoomType.AUDIO}
+              channel={channel}
+            />
+            <div className="space-y-[2px]">
+              {voiceRooms.map((room) => (
+                <ChannelRoom
+                  key={room.id}
+                  room={room}
+                  channel={channel}
+                  role={role}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!!videoRooms?.length && (
+          <div>
+            <ChannelSection
+              label="Video Room"
+              role={role}
+              sectionType="rooms"
+              roomType={RoomType.VIDEO}
+              channel={channel}
+            />
+            <div className="space-y-[2px]">
+              {videoRooms.map((room) => (
+                <ChannelRoom
+                  key={room.id}
+                  room={room}
+                  channel={channel}
+                  role={role}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* {!!members?.length && (
+          <div>
+            <ChannelSection
+              label="Members"
+              role={role}
+              sectionType="members"
+              channel={channel}
+            />
+            <div className="space-y-[2px]">
+              {members.map((member) => (
+                <ChannelMember key={member.id} member={member} />
+              ))}
+            </div>
+          </div>
+        )} */}
       </ScrollArea>
     </div>
   );
