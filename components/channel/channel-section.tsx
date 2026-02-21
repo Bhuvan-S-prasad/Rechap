@@ -29,7 +29,7 @@ export const ChannelSection = ({
       {role !== MemberRole.GUEST && sectionType === "rooms" && (
         <ActionTooltip label="Create Room" side="top">
           <button
-            onClick={() => onOpen("createRoom")}
+            onClick={() => onOpen("createRoom", { roomType })}
             className="text-zinc-400 hover:text-zinc-300 transition"
           >
             <Plus className="w-4 h-4" />

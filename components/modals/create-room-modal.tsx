@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import qs from "query-string";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z
@@ -44,18 +45,27 @@ const formSchema = z.object({
 });
 
 export const CreateRoomModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
   const params = useParams();
   const isModalOpen = isOpen && type === "createRoom";
+  const { roomType } = data;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: "TEXT",
+      type: roomType || "TEXT",
     },
   });
+
+  useEffect(() => {
+    if (roomType) {
+      form.setValue("type", roomType);
+    } else {
+      form.setValue("type", "TEXT");
+    }
+  }, [roomType, form]);
 
   const isLoading = form.formState.isSubmitting;
 
