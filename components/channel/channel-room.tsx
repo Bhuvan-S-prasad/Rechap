@@ -29,6 +29,7 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
   const onClick = () => {
     router.push(`/channels/${params.channelId}/rooms/${room.id}`);
   };
+
   return (
     <div
       onClick={onClick}
@@ -51,7 +52,10 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <button
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpen("editRoom", { channel, room });
+              }}
               className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition"
             >
               <Edit className="w-4 h-4 text-zinc-500" />
