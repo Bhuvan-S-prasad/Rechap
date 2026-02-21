@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ActionTooltip } from "../action-tooltip";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChannelRoomProps {
   room: Room;
@@ -23,15 +24,17 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
   const Icon = iconMap[room.type];
   const params = useParams();
   const router = useRouter();
+  const { onOpen } = useModal();
 
   const onClick = () => {
     router.push(`/channels/${params.channelId}/rooms/${room.id}`);
   };
   return (
-    <button
+    <div
       onClick={onClick}
+      role="button"
       className={cn(
-        "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/50 transition mb-1",
+        "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/50 transition mb-1 cursor-pointer",
         params?.roomId === room.id && "bg-zinc-700",
       )}
     >
@@ -47,12 +50,21 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
       {room.name !== "general" && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
-            <button className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition">
+            <button
+              onClick={(e) => e.stopPropagation()}
+              className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition"
+            >
               <Edit className="w-4 h-4 text-zinc-500" />
             </button>
           </ActionTooltip>
           <ActionTooltip label="Delete">
-            <button className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpen("deleteRoom", { channel, room });
+              }}
+              className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition"
+            >
               <Trash className="w-4 h-4 text-zinc-500" />
             </button>
           </ActionTooltip>
@@ -61,6 +73,6 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
       {room.name === "general" && (
         <Lock className="ml-auto w-4 h-4 text-zinc-400" />
       )}
-    </button>
+    </div>
   );
 };
