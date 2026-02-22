@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ActionTooltip } from "../action-tooltip";
-import { useModal } from "@/hooks/use-modal-store";
+import { useModal, ModalType } from "@/hooks/use-modal-store";
 
 interface ChannelRoomProps {
   room: Room;
@@ -28,6 +28,11 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
 
   const onClick = () => {
     router.push(`/channels/${params.channelId}/rooms/${room.id}`);
+  };
+
+  const onAction = (e: React.MouseEvent, action: ModalType) => {
+    e.stopPropagation();
+    onOpen(action, { channel, room });
   };
 
   return (
@@ -52,10 +57,7 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpen("editRoom", { channel, room });
-              }}
+              onClick={(e) => onAction(e, "editRoom")}
               className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition"
             >
               <Edit className="w-4 h-4 text-zinc-500" />
@@ -63,10 +65,7 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
           </ActionTooltip>
           <ActionTooltip label="Delete">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpen("deleteRoom", { channel, room });
-              }}
+              onClick={(e) => onAction(e, "deleteRoom")}
               className="hidden group-hover:block hover:bg-zinc-700/50 rounded-md transition"
             >
               <Trash className="w-4 h-4 text-zinc-500" />
