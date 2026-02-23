@@ -18,7 +18,7 @@ export const DMUserItem = ({ user, channelId, memberId }: DMUserItemProps) => {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/channels/${channelId}/conversations/${memberId}`);
+    router.push(`/direct-messages/${memberId}`);
   };
 
   return (

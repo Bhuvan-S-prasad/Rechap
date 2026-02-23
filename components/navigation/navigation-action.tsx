@@ -13,7 +13,7 @@ export const NavigationAction = () => {
       <ActionTooltip label="Direct Messages" side="right" align="center">
         <button
           className="group flex items-center"
-          onClick={() => router.push("/channels/direct-messages")}
+          onClick={() => router.push("/direct-messages")}
         >
           <div
             className="flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all
