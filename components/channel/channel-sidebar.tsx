@@ -9,6 +9,7 @@ import { Separator } from "../ui/separator";
 import { ChannelSection } from "./channel-section";
 import { RoomType } from "@/generated/prisma/enums";
 import { ChannelRoom } from "./channel-room";
+import { ChannelMember } from "./channel-member";
 
 interface ChannelSidebarProps {
   channelId: string;
@@ -182,7 +183,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
           </div>
         )}
 
-        {/* {!!members?.length && (
+        {!!members?.length && (
           <div>
             <ChannelSection
               label="Members"
@@ -196,7 +197,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
               ))}
             </div>
           </div>
-        )} */}
+        )}
       </ScrollArea>
     </div>
   );

@@ -1,12 +1,15 @@
 "use client";
 
-import { Member, MemberRole } from "@/generated/prisma/client";
+import { MemberRole } from "@/generated/prisma/enums";
 import { UserAvatar } from "../user-avatar";
 import { ShieldAlert, ShieldCheck, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface ChannelMemberProps {
-  member: Member & {
+  member: {
+    id: string;
+    role: MemberRole;
+    channelId: string;
     user: {
       name: string;
       imageUrl: string;
