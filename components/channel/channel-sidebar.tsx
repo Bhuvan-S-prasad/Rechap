@@ -69,7 +69,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
   )?.role;
 
   return (
-    <div className="flex flex-col h-full text-primary w-full p-3 dark:bg-background border-t-[0.2px] border-l-[0.2px] border-zinc-500 rounded-tl-2xl">
+    <div className="flex flex-col h-full text-primary w-full p-3 dark:bg-background border-t-[0.2px] border-l-[0.2px] border-zinc-800 rounded-tl-2xl">
       <ChannelHeader channel={channel} role={role} />
       <ScrollArea className="flex-1 overflow-y-auto">
         <div className="mt-3">
