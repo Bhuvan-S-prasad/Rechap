@@ -9,6 +9,7 @@ import { Separator } from "../ui/separator";
 import { ChannelSection } from "./channel-section";
 import { RoomType } from "@/generated/prisma/enums";
 import { ChannelRoom } from "./channel-room";
+import { ChannelMember } from "./channel-member";
 
 interface ChannelSidebarProps {
   channelId: string;
@@ -69,7 +70,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
   )?.role;
 
   return (
-    <div className="flex flex-col h-full text-primary w-full p-3 dark:bg-background border-t-[0.2px] border-l-[0.2px] border-zinc-500 rounded-tl-2xl">
+    <div className="flex flex-col h-full text-primary w-full p-3 dark:bg-background border-t-[0.2px] border-l-[0.2px] border-zinc-800 rounded-tl-2xl">
       <ChannelHeader channel={channel} role={role} />
       <ScrollArea className="flex-1 overflow-y-auto">
         <div className="mt-3">
@@ -182,7 +183,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
           </div>
         )}
 
-        {/* {!!members?.length && (
+        {!!members?.length && (
           <div>
             <ChannelSection
               label="Members"
@@ -196,7 +197,7 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
               ))}
             </div>
           </div>
-        )} */}
+        )}
       </ScrollArea>
     </div>
   );
