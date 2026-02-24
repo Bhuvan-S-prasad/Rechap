@@ -1,4 +1,5 @@
 import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
 import { currentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
@@ -39,6 +40,13 @@ const RoomIdPage = async ({ params }: RoomIdPageProps) => {
     <div className="bg-chat-background flex flex-col h-full">
       <ChatHeader
         channelId={channelId}
+        name={room?.name || ""}
+        type="channel"
+      />
+      <div className="flex-1"></div>
+      <ChatInput
+        apiUrl={"/api/socket/messages"}
+        query={{ channelId }}
         name={room?.name || ""}
         type="channel"
       />

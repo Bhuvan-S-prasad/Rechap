@@ -108,6 +108,7 @@ body,
   --sidebar-accent-foreground: rgb(28, 156, 240);
   --sidebar-border: rgb(56, 68, 77);
   --sidebar-ring: rgb(29, 161, 242);
+  --input-bg: rgb(34, 35, 39);
   --font-sans: Open Sans, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
@@ -172,6 +173,7 @@ body,
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-chat-background: var(--chat-background);
+  --color-input-bg: var(--input-bg);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
