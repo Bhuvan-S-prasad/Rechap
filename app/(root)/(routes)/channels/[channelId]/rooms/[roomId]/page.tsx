@@ -46,7 +46,7 @@ const RoomIdPage = async ({ params }: RoomIdPageProps) => {
       <div className="flex-1"></div>
       <ChatInput
         apiUrl={"/api/socket/messages"}
-        query={{ channelId }}
+        query={{ channelId, roomId }}
         name={room?.name || ""}
         type="channel"
       />
