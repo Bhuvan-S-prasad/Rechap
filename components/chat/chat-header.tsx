@@ -16,7 +16,7 @@ export const ChatHeader = ({
   imageUrl,
 }: ChatHeaderProps) => {
   return (
-    <div className="text-md font-semibold h-12 flex items-center px-6 border-b border-neutral-800">
+    <div className="fixed bg-chat-background z-30 w-full text-md font-semibold h-12 flex items-center px-6 border-b border-neutral-800">
       {type === "channel" && <Hash className="w-5 h-5 text-zinc-400 mr-2" />}
       {type === "conversation" && (
         <UserAvatar src={imageUrl} className="h-5 w-5 mr-2" />
