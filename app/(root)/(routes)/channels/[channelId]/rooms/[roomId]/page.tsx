@@ -1,4 +1,6 @@
 import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
+import { ChatMessages } from "@/components/chat/chat-messages";
 import { currentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
@@ -31,14 +33,36 @@ const RoomIdPage = async ({ params }: RoomIdPageProps) => {
     },
   });
 
-  //   if (!room || member) {
-  //     return redirect("/");
-  //   }
+  if (!room || !member) {
+    return redirect("/");
+  }
 
   return (
     <div className="bg-chat-background flex flex-col h-full">
       <ChatHeader
         channelId={channelId}
+        name={room?.name || ""}
+        type="channel"
+      />
+      <div className="flex-1">
+        <ChatMessages
+          member={member}
+          name={room?.name || ""}
+          chatId={roomId}
+          type="room"
+          apiUrl="/api/messages"
+          socketUrl="/api/socket/messages"
+          socketQuery={{
+            roomId,
+            channelId,
+          }}
+          paramKey="roomId"
+          paramValue={roomId}
+        />
+      </div>
+      <ChatInput
+        apiUrl={"/api/socket/messages"}
+        query={{ channelId, roomId }}
         name={room?.name || ""}
         type="channel"
       />
