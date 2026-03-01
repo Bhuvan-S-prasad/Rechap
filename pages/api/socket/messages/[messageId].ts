@@ -24,8 +24,8 @@ export default async function handler(
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    if (!content) {
-      return res.status(400).json({ error: "Missing required fields" });
+    if (req.method === "PATCH" && !content) {
+      return res.status(400).json({ error: "Missing content" });
     }
 
     const channel = await prisma.channel.findFirst({
