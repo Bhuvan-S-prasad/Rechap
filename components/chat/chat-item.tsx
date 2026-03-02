@@ -16,6 +16,7 @@ import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useModal } from "@/hooks/use-modal-store";
+import { useParams, useRouter } from "next/navigation";
 
 interface ChatItemProps {
   id: string;
@@ -68,6 +69,8 @@ export const ChatItem = ({
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { onOpen } = useModal();
+  const router = useRouter();
+  const params = useParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,6 +92,11 @@ export const ChatItem = ({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  const onMemberClick = () => {
+    if (member.id === currentMember.id) return;
+    router.push(`/channels/${params?.channelId}/conversations/${member.id}`);
+  };
 
   const isLoading = form.formState.isSubmitting;
 
@@ -115,7 +123,10 @@ export const ChatItem = ({
   return (
     <div className="relative group flex items-center bg-chat-background hover:bg-background p-4 transition w-full">
       <div className="flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
+        <div
+          onClick={onMemberClick}
+          className="cursor-pointer hover:drop-shadow-md transition"
+        >
           <UserAvatar src={member.user.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
@@ -223,10 +234,12 @@ export const ChatItem = ({
           )}
           <ActionTooltip label="Delete">
             <button
-              onClick={() => onOpen("deleteMessage", {
-                apiUrl: `${socketUrl}/${id}`,
-                query: socketQuery,
-              })}
+              onClick={() =>
+                onOpen("deleteMessage", {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
+              }
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
             >
               <Trash className="h-4 w-4" />
