@@ -44,7 +44,7 @@ const RoomIdPage = async ({ params }: RoomIdPageProps) => {
         name={room?.name || ""}
         type="channel"
       />
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col overflow-hidden pt-12 min-h-0 no-scrollbar scrollbar-hide">
         <ChatMessages
           member={member}
           name={room?.name || ""}

@@ -33,11 +33,13 @@ const ChannelLayout = async ({
   return (
     <>
       <Topbar channelId={channelId} />
-      <div className="h-full">
+      <div className="h-full bg-chat-background flex flex-col">
         <div className="max-md:hidden md:flex w-60 z-20 flex-col fixed top-12 bottom-0">
           <ChannelSidebar channelId={channelId} />
         </div>
-        <main className="h-full md:pl-60">{children}</main>
+        <main className="flex-1 flex flex-col md:pl-60 min-h-0">
+          {children}
+        </main>
       </div>
     </>
   );
