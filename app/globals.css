@@ -10,6 +10,19 @@ body,
   height: 100%;
   background-color: rgb(18, 18, 20);
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
 :root {
   --background: rgb(255, 255, 255);
   --foreground: rgb(15, 20, 25);
