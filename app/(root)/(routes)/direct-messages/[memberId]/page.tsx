@@ -1,4 +1,6 @@
 import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
+import { ChatMessages } from "@/components/chat/chat-messages";
 import { getOrCreateConversation } from "@/lib/conversation";
 import { currentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
@@ -52,6 +54,28 @@ const MemberIdPage = async ({ params }: MemberIdPageProps) => {
         name={otherMember.user.name}
         channelId={channelId}
         type="conversation"
+      />
+      <ChatMessages
+        name={otherMember.user.name}
+        member={currentMember}
+        chatId={conversation.id}
+        type="conversation"
+        apiUrl="/api/direct-messages"
+        socketUrl="/api/socket/direct-messages"
+        socketQuery={{
+          channelId: channelId,
+          conversationId: conversation.id,
+        }}
+        paramKey="conversationId"
+        paramValue={conversation.id}
+      />
+      <ChatInput
+        name={otherMember.user.name}
+        type="conversation"
+        apiUrl="/api/socket/direct-messages"
+        query={{
+          conversationId: conversation.id,
+        }}
       />
     </div>
   );
