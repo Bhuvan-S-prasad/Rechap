@@ -1,6 +1,8 @@
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
+import { MediaRoom } from "@/components/room/media-room";
+import { RoomType } from "@/generated/prisma/enums";
 import { currentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
@@ -45,27 +47,37 @@ const RoomIdPage = async ({ params }: RoomIdPageProps) => {
         type="channel"
       />
       <div className="flex-1 flex flex-col overflow-hidden pt-12 min-h-0 no-scrollbar scrollbar-hide">
-        <ChatMessages
-          member={member}
-          name={room?.name || ""}
-          chatId={roomId}
-          type="room"
-          apiUrl="/api/messages"
-          socketUrl="/api/socket/messages"
-          socketQuery={{
-            roomId,
-            channelId,
-          }}
-          paramKey="roomId"
-          paramValue={roomId}
-        />
+        {room.type === RoomType.TEXT && (
+          <>
+            <ChatMessages
+              member={member}
+              name={room?.name || ""}
+              chatId={roomId}
+              type="room"
+              apiUrl="/api/messages"
+              socketUrl="/api/socket/messages"
+              socketQuery={{
+                roomId,
+                channelId,
+              }}
+              paramKey="roomId"
+              paramValue={roomId}
+            />
+            <ChatInput
+              apiUrl={"/api/socket/messages"}
+              query={{ channelId, roomId }}
+              name={room?.name || ""}
+              type="channel"
+            />
+          </>
+        )}
+        {room.type === RoomType.AUDIO && (
+          <MediaRoom chatId={roomId} video={false} audio={true} />
+        )}
+        {room.type === RoomType.VIDEO && (
+          <MediaRoom chatId={roomId} video={true} audio={true} />
+        )}
       </div>
-      <ChatInput
-        apiUrl={"/api/socket/messages"}
-        query={{ channelId, roomId }}
-        name={room?.name || ""}
-        type="channel"
-      />
     </div>
   );
 };
