@@ -3,8 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
-import { Search, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { DMUserItem } from "./dm-user-item";
+import { DMSearch } from "./dm-search";
+import { UserAvatar } from "../user-avatar";
 
 export const DMSidebar = async () => {
   const profile = await currentUser();
@@ -48,7 +50,6 @@ export const DMSidebar = async () => {
     },
   });
 
-  // Deduplicate by the other user's id so each user only appears once
   const seenUserIds = new Set<string>();
   const uniqueConversations = conversations.filter((conv) => {
     const otherUser =
@@ -63,12 +64,29 @@ export const DMSidebar = async () => {
   return (
     <div className="flex flex-col h-full text-primary w-full p-3 dark:bg-background border-t-[0.2px] border-l-[0.2px] border-zinc-800 rounded-tl-2xl">
       {/* Search bar */}
-      <button className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition">
-        <Search className="w-4 h-4 text-zinc-400" />
-        <p className="font-semibold text-sm text-zinc-400 group-hover:text-zinc-300 transition">
-          Find or start a conversation
-        </p>
-      </button>
+      <DMSearch
+        data={[
+          {
+            label: "Conversations",
+            data: uniqueConversations.map((conv) => {
+              const otherMember =
+                conv.memberOne.userId === profile.id
+                  ? conv.memberTwo
+                  : conv.memberOne;
+              return {
+                icon: (
+                  <UserAvatar
+                    src={otherMember.user.imageUrl}
+                    className="h-6 w-6"
+                  />
+                ),
+                id: otherMember.id,
+                name: otherMember.user.name,
+              };
+            }),
+          },
+        ]}
+      />
 
       <Separator className="bg-zinc-700 rounded-md my-2" />
 
@@ -102,7 +120,6 @@ export const DMSidebar = async () => {
               );
             })
           ) : (
-            // Empty state — skeleton-like placeholders
             <div className="space-y-3 px-2 pt-2">
               {[140, 110, 160, 130, 120, 150, 100].map((width, i) => (
                 <div key={i} className="flex items-center gap-x-2">
