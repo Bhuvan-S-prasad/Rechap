@@ -11,6 +11,26 @@ body,
   background-color: rgb(18, 18, 20);
 }
 
+/* Prevent Tailwind preflight from resetting LiveKit component styles */
+[data-lk-theme] button,
+[data-lk-theme] input,
+[data-lk-theme] select,
+[data-lk-theme] textarea {
+  all: revert;
+}
+
+[data-lk-theme] {
+  color-scheme: dark;
+}
+
+.lk-video-conference {
+  height: 100%;
+}
+
+.lk-control-bar {
+  display: flex !important;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */

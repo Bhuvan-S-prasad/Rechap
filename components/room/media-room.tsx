@@ -1,10 +1,12 @@
 "use client";
 
-import { LiveKitRoom, VideoConference } from "@livekit/components-react";
-import { useEffect, useState } from "react";
+import {
+  LiveKitRoom,
+  VideoConference,
+  AudioConference,
+} from "@livekit/components-react";
 import "@livekit/components-styles";
-import { Room } from "@/generated/prisma/client";
-import { useSession } from "@livekit/components-react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 
@@ -17,8 +19,6 @@ interface MediaRoomProps {
 export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
   const { user } = useUser();
   const [token, setToken] = useState("");
-  const [videoTracks, setVideoTracks] = useState<MediaStreamTrack[]>([]);
-  const [audioTracks, setAudioTracks] = useState<MediaStreamTrack[]>([]);
 
   useEffect(() => {
     if (!user?.firstName || !user?.lastName) return;
@@ -27,7 +27,9 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
 
     (async () => {
       try {
-        const resp = await fetch(`api/livekit?room=${chatId}&username=${name}`);
+        const resp = await fetch(
+          `/api/livekit?room=${chatId}&username=${name}`,
+        );
         const data = await resp.json();
         setToken(data.token);
       } catch (e) {
@@ -46,15 +48,17 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
   }
 
   return (
-    <LiveKitRoom
-      data-lk-theme="dark"
-      video={video}
-      audio={audio}
-      token={token}
-      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
-      connect={true}
-    >
-      <VideoConference />
-    </LiveKitRoom>
+    <div data-lk-theme="default" style={{ height: "100%", width: "100%" }}>
+      <LiveKitRoom
+        video={video}
+        audio={audio}
+        token={token}
+        serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+        connect={true}
+        style={{ height: "100%" }}
+      >
+        {video ? <VideoConference /> : <AudioConference />}
+      </LiveKitRoom>
+    </div>
   );
 };
