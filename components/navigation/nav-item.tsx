@@ -15,7 +15,7 @@ export const NavItem = ({ id, imageUrl, name }: NavItemProps) => {
   const params = useParams();
   const router = useRouter();
 
-  const isActive = params.channelId === id;
+  const isActive = params?.channelId === id;
 
   const onClick = () => {
     router.push(`/channels/${id}`);
@@ -23,10 +23,7 @@ export const NavItem = ({ id, imageUrl, name }: NavItemProps) => {
 
   return (
     <ActionTooltip side="right" align="center" label={name}>
-      <button
-        onClick={onClick}
-        className="group relative flex items-center"
-      >
+      <button onClick={onClick} className="group relative flex items-center">
         <div
           className={cn(
             "absolute left-0 bg-primary rounded-r-full transition-all w-[4px]",
