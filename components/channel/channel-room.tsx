@@ -27,7 +27,7 @@ export const ChannelRoom = ({ room, channel, role }: ChannelRoomProps) => {
   const { onOpen } = useModal();
 
   const onClick = () => {
-    router.push(`/channels/${params.channelId}/rooms/${room.id}`);
+    router.push(`/channels/${params?.channelId}/rooms/${room.id}`);
   };
 
   const onAction = (e: React.MouseEvent, action: ModalType) => {

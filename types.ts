@@ -4,7 +4,7 @@ import { Server as SocketIOServer } from "socket.io";
 import { Channel, Member, User } from "./generated/prisma/client";
 
 export type ChannelWithMembersWithProfiles = Channel & {
-  members: Member & { profile: User };
+  members: (Member & { user: User })[];
 };
 
 export type NextApiResponseServerIO = NextApiResponse & {
