@@ -24,10 +24,11 @@ Rechap is a real-time chat application inspired by the Discord frontend. This wa
 
 The following features and rooms are planned in the roadmap:
 
-- [ ] Audio Room
-- [ ] Video Room
-- [ ] Direct Messages
+- [x] Audio Room
+- [x] Video Room
+- [x] Direct Messages
 - [ ] Streaming Room
+- [ ] migrate away from LiveKit and build native audio/video room implementation
 
 ## Acknowledgments
 
