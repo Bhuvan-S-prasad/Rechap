@@ -11,6 +11,7 @@ import { DeleteRoomModal } from "../modals/delete-room-modal";
 import { EditRoomModal } from "../modals/edit-room-modal";
 import { MessageFileModal } from "../modals/message-file-modal";
 import { DeleteMessageModal } from "../modals/delete-message-modal";
+import { UserProfileModal } from "../modals/user-profile-modal";
 
 export const ModalProvider = () => {
   return (
@@ -26,6 +27,7 @@ export const ModalProvider = () => {
       <EditRoomModal />
       <MessageFileModal />
       <DeleteMessageModal />
+      <UserProfileModal />
     </>
   );
 };

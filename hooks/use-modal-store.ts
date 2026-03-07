@@ -1,4 +1,10 @@
-import { Channel, Room, RoomType } from "@/generated/prisma/client";
+import {
+  Channel,
+  Member,
+  Room,
+  RoomType,
+  User,
+} from "@/generated/prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
@@ -12,7 +18,8 @@ export type ModalType =
   | "deleteRoom"
   | "editRoom"
   | "messageFile"
-  | "deleteMessage";
+  | "deleteMessage"
+  | "userProfile";
 
 interface ModalData {
   channel?: Channel;
@@ -20,6 +27,7 @@ interface ModalData {
   roomType?: RoomType;
   apiUrl?: string;
   query?: Record<string, string>;
+  member?: Member & { user: User };
 }
 
 interface ModalStore {
