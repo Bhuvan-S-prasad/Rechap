@@ -95,7 +95,7 @@ export const ChatItem = ({
 
   const onMemberClick = () => {
     if (member.id === currentMember.id) return;
-    router.push(`/channels/${params?.channelId}/conversations/${member.id}`);
+    onOpen("userProfile", { member });
   };
 
   const isLoading = form.formState.isSubmitting;
