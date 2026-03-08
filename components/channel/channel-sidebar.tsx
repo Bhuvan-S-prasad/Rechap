@@ -182,22 +182,6 @@ export const ChannelSidebar = async ({ channelId }: ChannelSidebarProps) => {
             </div>
           </div>
         )}
-
-        {!!members?.length && (
-          <div>
-            <ChannelSection
-              label="Members"
-              role={role}
-              sectionType="members"
-              channel={channel}
-            />
-            <div className="space-y-[2px]">
-              {members.map((member) => (
-                <ChannelMember key={member.id} member={member} />
-              ))}
-            </div>
-          </div>
-        )}
       </ScrollArea>
     </div>
   );

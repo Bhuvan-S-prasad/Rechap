@@ -1,22 +1,23 @@
 "use client";
 
 import { useSocket } from "@/components/providers/socket-provider";
-import { Badge } from "@/components/ui/badge";
 
 export const SocketIndicator = () => {
   const { isConnected } = useSocket();
 
   if (!isConnected) {
     return (
-      <Badge variant="outline" className="bg-rose-500 border-none text-white">
-        failed
-      </Badge>
+      <div
+        className="h-2.5 w-2.5 rounded-full bg-orange-500 shadow-sm"
+        title="Connecting..."
+      />
     );
   }
 
   return (
-    <Badge variant="outline" className="bg-emerald-500 border-none text-white">
-      Live
-    </Badge>
+    <div
+      className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-sm"
+      title="Connected"
+    />
   );
 };

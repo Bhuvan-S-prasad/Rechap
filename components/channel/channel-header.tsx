@@ -34,7 +34,7 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
     <DropdownMenu>
       <div className="flex justify-between">
         <DropdownMenuTrigger className="focus:outline-none" asChild>
-          <button className="text-sm font-semibold flex items-center px-3 h-10 rounded-xl hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
+          <button className="text-sm font-semibold flex items-center px-3 h-10 rounded-md hover:bg-foreground/10 dark:hover:bg-zinc-700/50 dark:text-neutral-200 transition">
             {channel.name}
             <ChevronDown className="h-5 w-5 ml-1" />
           </button>
@@ -42,7 +42,7 @@ export const ChannelHeader = ({ channel, role }: ChannelHeaderProps) => {
         {isModerator && (
           <button
             onClick={() => onOpen("invite", { channel })}
-            className="text-white px-3 text-sm cursor-pointer rounded-2xl hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 dark:text-neutral-400 dark:hover:text-neutral-200 transition"
+            className="text-white px-3 text-sm cursor-pointer rounded-md hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 dark:text-neutral-400 dark:hover:text-neutral-200 transition"
           >
             <UserPlus className="h-4 w-4 ml-auto" />
           </button>
