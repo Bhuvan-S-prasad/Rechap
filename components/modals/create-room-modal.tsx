@@ -93,7 +93,7 @@ export const CreateRoomModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md border-none">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Create Room
@@ -140,7 +140,7 @@ export const CreateRoomModal = () => {
                           <SelectValue placeholder="Select room type" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="border-none">
                         <SelectItem value="TEXT">Text</SelectItem>
                         <SelectItem value="AUDIO">Audio</SelectItem>
                         <SelectItem value="VIDEO">Video</SelectItem>
@@ -152,7 +152,7 @@ export const CreateRoomModal = () => {
               />
             </div>
             <DialogFooter className="bg-muted px-6 py-4">
-              <Button disabled={isLoading} variant="primary" className="w-full">
+              <Button disabled={isLoading} variant="primary" className="w-full bg-emerald-500 text-black">
                 Create
               </Button>
             </DialogFooter>

@@ -94,7 +94,7 @@ export const MembersModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-card text-primary overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-primary overflow-hidden sm:max-w-md border-none">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold text-primary">
             Manage Members
@@ -125,18 +125,19 @@ export const MembersModal = () => {
                         <DropdownMenuTrigger>
                           <MoreVertical className="h-4 w-4" />
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent side="left">
+                        <DropdownMenuContent side="left" className="border-zinc-600">
                           <DropdownMenuSub>
-                            <DropdownMenuSubTrigger className="flex items-center">
+                            <DropdownMenuSubTrigger className="flex items-center rounded-md">
                               <ShieldQuestion className="h-4 w-4 mr-2" />
                               <span>Role</span>
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
-                              <DropdownMenuSubContent>
+                              <DropdownMenuSubContent className="border-zinc-600">
                                 <DropdownMenuItem
                                   onClick={() =>
                                     onRoleChange(member.id, "GUEST")
                                   }
+                                  className="rounded-md hover:text-card-foreground"
                                 >
                                   <ShieldQuestion className="h-4 w-4 mr-2" />
                                   <span>Guest</span>
@@ -148,6 +149,7 @@ export const MembersModal = () => {
                                   onClick={() =>
                                     onRoleChange(member.id, "MODERATOR")
                                   }
+                                  className="rounded-md hover:text-card-foreground"
                                 >
                                   <ShieldCheck className="h-4 w-4 mr-2" />
                                   <span>Moderator</span>
@@ -159,7 +161,7 @@ export const MembersModal = () => {
                             </DropdownMenuPortal>
                           </DropdownMenuSub>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem onClick={() => onRemove(member.id)}>
+                          <DropdownMenuItem onClick={() => onRemove(member.id)} className="rounded-md hover:text-card-foreground">
                             <Trash className="h-4 w-4 mr-2" />
                             Remove Member
                           </DropdownMenuItem>

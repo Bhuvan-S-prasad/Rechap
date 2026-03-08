@@ -37,7 +37,7 @@ export const LeaveChannelModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-card text-primary p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-primary p-0 overflow-hidden sm:max-w-md border-none">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold text-primary">
             Leave Channel

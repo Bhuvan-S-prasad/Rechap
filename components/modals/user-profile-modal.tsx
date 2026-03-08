@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "../ui/scroll-area";
+import Image from "next/image";
 
 interface ChannelItem {
   id: string;
@@ -156,7 +157,9 @@ export const UserProfileModal = () => {
                           "bg-emerald-500/10 text-emerald-400",
                       )}
                     >
-                      <img
+                      <Image
+                        width={24}
+                        height={24}
                         src={channel.imageUrl}
                         alt={channel.name}
                         className="h-6 w-6 rounded-full object-cover"

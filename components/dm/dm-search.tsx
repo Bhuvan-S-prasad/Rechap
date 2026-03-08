@@ -45,7 +45,7 @@ export const DMSearch = ({ data }: DMSearchProps) => {
           Find or start a conversation
         </p>
       </button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen} className="border-none">
         <CommandInput placeholder="Search conversations..." />
         <CommandList>
           <CommandEmpty>No conversations found.</CommandEmpty>
@@ -61,6 +61,7 @@ export const DMSearch = ({ data }: DMSearchProps) => {
                   onSelect={() => onClick(item.id)}
                   key={item.id}
                   value={item.name}
+                  className="rounded-md hover:text-card-foreground hover:bg-zinc-800"
                 >
                   {item.icon}
                   <span className="ml-2">{item.name}</span>

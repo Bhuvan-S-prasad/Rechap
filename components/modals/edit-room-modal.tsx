@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useModal } from "@/hooks/use-modal-store";
 import {
@@ -91,7 +91,7 @@ export const EditRoomModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md border-none">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Edit Room
@@ -150,7 +150,7 @@ export const EditRoomModal = () => {
               />
             </div>
             <DialogFooter className="bg-muted px-6 py-4">
-              <Button disabled={isLoading} variant="primary" className="w-full">
+              <Button disabled={isLoading} variant="primary" className="w-full bg-emerald-500 hover:bg-emerald-600 text-black">
                 Edit
               </Button>
             </DialogFooter>

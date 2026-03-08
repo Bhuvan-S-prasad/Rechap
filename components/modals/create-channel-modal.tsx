@@ -67,7 +67,7 @@ export const CreateChannelModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foreground p-0 overflow-hidden sm:max-w-md border-none rounded-md">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold text-foreground">
             Customize your Channel
@@ -125,7 +125,11 @@ export const CreateChannelModal = () => {
               />
             </div>
             <DialogFooter className="bg-muted px-6 py-4">
-              <Button disabled={isLoading} variant="primary" className="w-full bg-emerald-500 text-black hover:bg-emerald-600">
+              <Button
+                disabled={isLoading}
+                variant="primary"
+                className="w-full bg-emerald-500 text-black hover:bg-emerald-600"
+              >
                 Create
               </Button>
             </DialogFooter>

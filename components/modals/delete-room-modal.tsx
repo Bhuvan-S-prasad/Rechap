@@ -62,6 +62,7 @@ export const DeleteRoomModal = () => {
               variant="outline"
               onClick={onClose}
               disabled={isLoading}
+              className="hover:text-card-foreground"
             >
               Cancel
             </Button>

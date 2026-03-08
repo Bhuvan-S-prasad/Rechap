@@ -76,7 +76,7 @@ export const EditChannelModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card text-card-foregroun p-0 overflow-hidden sm:max-w-md">
+      <DialogContent className="bg-card text-card-foregroun p-0 overflow-hidden sm:max-w-md border-none">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold text-primary">
             Customize your Channel
@@ -133,7 +133,7 @@ export const EditChannelModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-card-foreground px-6 py-4 ">
+            <DialogFooter className="bg-muted px-6 py-4 ">
               <Button
                 disabled={isLoading}
                 variant="primary"

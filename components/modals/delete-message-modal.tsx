@@ -50,7 +50,12 @@ export const DeleteMessageModal = () => {
 
         <DialogFooter className="bg-card px-6 py-4">
           <div className="flex items-center justify-between w-full">
-            <Button variant="outline" onClick={onClose} disabled={isLoading}>
+            <Button
+              variant="outline"
+              onClick={onClose}
+              disabled={isLoading}
+              className="hover:text-card-foreground"
+            >
               Cancel
             </Button>
             <Button
