@@ -7,7 +7,7 @@ import z from "zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { Plus, Smile } from "lucide-react";
+import { Plus } from "lucide-react";
 import axios from "axios";
 import qs from "query-string";
 import { useModal } from "@/hooks/use-modal-store";
@@ -74,6 +74,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     disabled={isLoading}
                     className="px-14 py-6 bg-input-bg border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-200"
                     placeholder={`message ${type === "conversation" ? name : "#" + name}`}
+                    autoComplete="off"
                     {...field}
                   />
                   <div className="absolute top-7 right-8">
