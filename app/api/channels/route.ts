@@ -44,3 +44,28 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    const profile = await currentUser();
+
+    if (!profile) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const channels = await prisma.channel.findMany({
+      where: {
+        members: {
+          some: {
+            userId: profile.id,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(channels);
+  } catch (error) {
+    console.log("CHANNELS_GET_ERROR:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}
