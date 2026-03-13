@@ -4,6 +4,17 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { MemberRole } from "@/generated/prisma/enums";
 
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
+
 export async function POST(req: Request) {
   try {
     const { name, imageUrl } = await req.json();
