@@ -4,11 +4,21 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { MemberRole } from "@/generated/prisma/enums";
 
-export async function OPTIONS() {
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:8081",
+  "https://rechap01.netlify.app",
+];
+
+export async function OPTIONS(req: Request) {
+  const origin = req.headers.get("origin") || "";
+
+  const allowOrigin = allowedOrigins.includes(origin) ? origin : "";
+
   return new NextResponse(null, {
     status: 204,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": allowOrigin,
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
